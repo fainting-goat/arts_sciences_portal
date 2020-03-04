@@ -13,6 +13,7 @@ admin = User.create(
     :password => 'adminadmin',
     :password_confirmation => 'adminadmin',
     user_role: admin_role,
+    sca_name: 'Admin',
     region: region,
     confirmed_at: DateTime.now)
 user = User.create(
@@ -20,6 +21,7 @@ user = User.create(
     :password => 'useruser',
     :password_confirmation => 'useruser',
     user_role: user_role,
+    sca_name: 'User',
     region: region,
     confirmed_at: DateTime.now)
 

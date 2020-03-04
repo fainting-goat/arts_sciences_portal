@@ -5,11 +5,7 @@ class ScoresheetPolicy < ApplicationPolicy
     @scoresheet = scoresheet
   end
 
-  def owns_entry?
-    @user.admin? || UserEntry.entrants(@entry).include?(@user)
-  end
-
   def owns_scoresheet?
-    @user.admin? || (@scoresheet.user == @user && @entry.fair.finalized)
+    @user.admin? || (@scoresheet.user == @user && !@entry.fair.finalized) || (UserEntry.entrants(@entry).include?(@user) && @entry.fair.finalized)
   end
 end
