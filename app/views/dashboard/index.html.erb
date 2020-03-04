@@ -1,4 +1,6 @@
 <% if current_user.admin? %>
+  <h3>Tallyroom</h3>
+  <%= link_to 'Tallyroom', tallyroom_path %>
   <h3>Admin Management</h3>
   <%= link_to 'Scoresheet Management', scoresheets_path %>
   <br>

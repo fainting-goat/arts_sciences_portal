@@ -1,0 +1,5 @@
+<%= form.hidden_field(:criteria_type_id, :value => criteria.id) %>
+<p>Score:
+  <%= form.number_field :score, required: true, step: 0.01, class: "total_for_#{criteria.description}" %></p>
+<p>Comments:<br>
+  <%= form.text_area :comment, size: "50x5" %></p>

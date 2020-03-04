@@ -1,0 +1,71 @@
+<h3><%= @entry.entry_name %></h3>
+<% if @scoresheet.shadow_scoresheet? %>
+  <h4>This is a shadow judge scoresheet.</h4>
+<% end %>
+
+<p>
+  <strong>Judge:</strong>
+  <%= @scoresheet.user.email_or_name %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @entry.category.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= simple_format @entry.category.description %>
+</p>
+
+<p>
+  <strong>Division:</strong>
+  <%= @entry.category.division.name %>
+</p>
+
+<% CriteriaType.all.top_level.in_order.each do |criteria_type| %>
+  <p>
+    <strong><%= criteria_type.description %></strong>
+  </p>
+
+  <p><%= CriteriaDescription.description_for_category(criteria_type.id, @entry.category.id) %></p>
+
+  <% Criterium.all.by_type(criteria_type.id).by_category(@entry.category.id).order(:suggested_score).each do |criteria| %>
+    <p><%= "#{criteria.suggested_score} - #{criteria.description}" %></p>
+  <% end %>
+
+  <% CriteriaType.all.children_for(criteria_type).applicable(@entry.category).each do |child_criteria| %>
+    <strong><%= child_criteria.description %></strong>
+    <ul>
+      <% Criterium.where(criteria_type_id: child_criteria.id).each do |child_criterium| %>
+        <li><%= child_criterium.description %></li>
+      <% end %>
+    </ul>
+    <%= render partial: 'sub_criteria_score', locals: {score: @scoresheet.scores.find_by(criteria_type_id: child_criteria.id)} %>
+    <hr>
+  <% end %>
+
+  <%= render partial: 'score', locals: {score: @scoresheet.scores.find_by(criteria_type_id: criteria_type.id)} %>
+  <hr>
+<% end %>
+
+<div><b>Total Score:</b>  <%= @scoresheet.total_score %></div>
+
+
+<% if @current_user == @scoresheet.user %>
+  <%= link_to 'Edit', edit_entry_scoresheet_path(@scoresheet.entry, @scoresheet) %> |
+  <%= link_to 'Back', scoresheets_path %>
+<% else %>
+  <%= link_to 'Back', entries_path %>
+<% end %>
+
+<br>
+
+<script type="text/javascript">
+    function printpage()
+    {
+        window.print()
+    }
+</script>
+
+<%= link_to "Print Page", '#', onclick: "printpage()" %>

@@ -1,0 +1,5 @@
+<%= form.hidden_field(:criteria_type_id, :value => criteria.id) %>
+<p>Score (0 - <%= criteria.max_score %>):
+  <%= form.number_field :score, required: true, step: 0.5, max: criteria.max_score %></p>
+<p>Comments:<br>
+  <%= form.text_area :comment, size: "50x5", required: true %></p>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   get 'review', to: 'dashboard#review', as: 'review'
+  get 'tallyroom', to: 'tallyroom#index'
 
   resources :entries do
     resources :user_entries, only: [:new, :create, :index, :destroy]

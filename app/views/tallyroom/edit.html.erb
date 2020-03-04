@@ -1,0 +1,6 @@
+<h1>Editing Scoresheet</h1>
+
+<%= render 'form', scoresheet: @scoresheet %>
+
+<%= link_to 'Show', entry_scoresheet_path(@scoresheet.entry, @scoresheet) %> |
+<%= link_to 'Back', scoresheets_path %>

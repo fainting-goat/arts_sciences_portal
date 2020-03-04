@@ -1,30 +1,12 @@
 include FairsHelper
 
-class ScoresheetsController < ApplicationController
-  before_action :set_scoresheet, only: [:show, :edit, :update, :destroy]
-  before_action :set_entry, only: [:create, :new, :edit, :update, :show]
-  before_action :verify_owns_scoresheet, only: [:show, :edit, :update, :destroy]  #TODO: re-enable this so it doesn't break things
-
-  def verify_owns_scoresheet
-    authorize @scoresheet, :owns_scoresheet?
-  end
-
-  # GET /scoresheets
-  # GET /scoresheets.json
+class TallyroomController < ApplicationController
   def index
     fair = next_fair
-
-    if fair.mail_in_scoresheets_allowed && !fair.scoresheets_allowed
-      @entries = filter_unjudged(Entry.fair_entries(fair).judge_assigned_entries(current_user).joins(:category).where('mail_in = ?', true))
-    else
-      @entries = filter_unjudged(Entry.fair_entries(fair).judge_assigned_entries(current_user))
-    end
-
-    if current_user.admin?
-      @scoresheets = Scoresheet.all
-    else
-      @scoresheets = Scoresheet.for_user(current_user)
-    end
+    @unjudged_entries = filter_admin_unjudged(Entry.fair_entries(fair))
+    @scoresheets = Scoresheet.for_fair(fair)
+    # @remaining_judges = JudgeAssign.where.not(entry_id: @scoresheets.pluck(:entry_id), user_id: @scoresheets.pluck(:user_id))
+    @remaining_judges = JudgeAssign.for_fair(fair).reject {|assign| !@scoresheets.find_by(user_id: assign.user_id, entry_id: assign.entry_id).nil? }
   end
 
   # GET /scoresheets/1

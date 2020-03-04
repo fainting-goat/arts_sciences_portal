@@ -6,6 +6,7 @@ class Scoresheet < ApplicationRecord
   accepts_nested_attributes_for :scores
 
   scope :for_user, -> (user) { where("user_id = ?", user.id)}
+  scope :for_fair, -> (fair) { joins(:entry).where(entries: {fair_id: fair.id})}
 
   def shadow_scoresheet?
     JudgeAssign.find_by(entry_id: entry_id, user_id: user_id).shadow

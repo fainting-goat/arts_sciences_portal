@@ -1,0 +1,54 @@
+<h1>Tallyroom</h1>
+
+<div>
+  <p>There are <strong><%= @scoresheets.count %></strong> scoresheets submitted.</p>
+  <p>There are <strong><%= @remaining_judges.count %></strong> scoresheets remaining.</p>
+  <p>There are <strong><%= @unjudged_entries.count %></strong> entries left to be fully judged.</p>
+</div>
+
+<% if current_user.admin? %>
+  <table>
+    <thead>
+    <tr>
+      <th>All Unjudged Entries</th>
+      <th colspan="2"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @unjudged_entries.each do |entry| %>
+      <tr>
+        <td><%= entry.entry_name %></td>
+        <td><%= link_to 'New Scoresheet', new_entry_scoresheet_path(entry) %></td>
+        <td><%= simple_format @remaining_judges.select{|n| n.entry_id == entry.id}.map {|judge| judge.user.sca_name }.join('<br>') %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<table>
+  <thead>
+  <tr>
+    <th>Submitted scoresheets</th>
+    <th>Judge</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @scoresheets.each do |scoresheet| %>
+    <tr>
+      <td><%= scoresheet.entry.entry_name %></td>
+      <td><%= scoresheet.user.email_or_name %></td>
+      <td><%= link_to 'View Details', entry_scoresheet_path(scoresheet.entry, scoresheet) %></td>
+      <td><%= link_to 'Edit', edit_entry_scoresheet_path(scoresheet.entry, scoresheet) %></td>
+      <% if current_user.admin? %>
+        <td><%= link_to 'Delete', [scoresheet.entry, scoresheet], method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br><%= link_to 'Back', root_path %>

@@ -1,0 +1,79 @@
+<%= form_with(model: [@entry, scoresheet], local: true) do |form| %>
+  <% if scoresheet.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(scoresheet.errors.count, "error") %> prohibited this scoresheet from being saved:</h2>
+
+      <ul>
+        <% scoresheet.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h3><%= @entry.entry_name %></h3>
+
+  <% if current_user.admin? %>
+    <strong>Person Judging this Entry</strong>
+    <%= form.select :user_id, JudgeAssign.joins(:user).where(entry_id: @entry.id).map{ |m| ["#{m.user.email} - #{m.user.sca_name}", m.user_id] }%>
+  <% end %>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @entry.category.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= simple_format @entry.category.description %>
+  </p>
+
+  <p>
+    <strong>Division:</strong>
+    <%= @entry.category.division.name %>
+  </p>
+
+  <% CriteriaType.all.top_level.in_order.each do |criteria_type| %>
+    <p>
+      <strong><%= criteria_type.description %></strong>
+    </p>
+
+    <p><%= CriteriaDescription.description_for_category(criteria_type.id, @entry.category.id) %></p>
+
+    <% Criterium.all.by_type(criteria_type.id).by_category(@entry.category.id).order(:suggested_score).each do |criteria| %>
+      <p><%= "#{criteria.suggested_score} - #{criteria.description}" %></p>
+    <% end %>
+
+
+<!-- children start here -->
+
+    <% CriteriaType.all.children_for(criteria_type).applicable(@entry.category).each do |child_criteria| %>
+      <strong><%= child_criteria.description %></strong>
+      <ul>
+        <% Criterium.where(criteria_type_id: child_criteria.id).each do |child_criterium| %>
+          <li><%= child_criterium.description %></li>
+        <% end %>
+      </ul>
+      <%= form.fields_for 'scores[]', @scoresheet.scores.select {|n| n.criteria_type_id == child_criteria.id}.first do |score_fields| %>
+        <%= render partial: 'sub_criteria_scoresheet', locals: {form: score_fields, criteria: child_criteria} %>
+      <% end %>
+      <hr>
+    <% end %>
+
+<!-- children end here -->
+
+    <b><%= "Total Score for #{criteria_type.description}" %></b>
+    <%= form.fields_for 'scores[]', @scoresheet.scores.select {|n| n.criteria_type_id == criteria_type.id}.first do |score_fields| %>
+      <% if ["Scope", "Skill"].include?(criteria_type.description) %>
+        <%= render partial: 'scoresheet_sub_criteria_total', locals: {form: score_fields, criteria: criteria_type} %>
+      <% else %>
+        <%= render partial: 'scoresheet', locals: {form: score_fields, criteria: criteria_type} %>
+      <% end %>
+    <% end %>
+    <hr>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

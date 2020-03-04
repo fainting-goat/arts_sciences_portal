@@ -1,0 +1,3 @@
+<%= form.hidden_field(:criteria_type_id, :value => criteria.id) %>
+<p>Score (0 - <%= criteria.max_score %>):
+  <%= form.number_field :score, required: false, step: 0.5, max: criteria.max_score, class: "children_for_#{criteria.parent.description}" %></p>
