@@ -84,4 +84,4 @@ $(document).on("change", ".children_for_Skill", function() {
     total = (total / size).toFixed(2);
 
     $(".total_for_Skill").val(total);
-});
+});import "../css/application.css"

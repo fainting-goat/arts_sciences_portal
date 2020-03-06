@@ -9,11 +9,24 @@
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
-<body>
-<div class="banner">
-  <h1>Midrealm Arts and Sciences Fair Portal</h1>
+<div class="bg-teal-500 px-4 py-4">
+  <div class="md:max-w-6xl md:mx-auto md:flex md:items-center md:justify-between">
+    <div class="hidden md:block">
+      <%= link_to 'Midrealm Arts and Sciences Portal', root_path, class: "text-3xl text-white" %>
+    </div>
+    <div class="hidden md:block">
+      <% if user_signed_in? %>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "hover:text-yellow-500 text-white font-bold py-2 px-4 rounded" %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path, class: "hover:text-yellow-500 text-white font-bold py-2 px-4 rounded" %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "bg-teal-100 hover:bg-yellow-500 font-bold py-2 px-4 rounded" %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
+<!--<body bgcolor="#4a4054">-->
+<body class="bg-teal-700">
 <div class="body">
   <% flash.each do |name, msg| %>
     <% if msg.class == Array %>
@@ -25,17 +38,11 @@
     <% end %>
   <% end %>
 
-  <%= yield %>
-
-  <% if user_signed_in? %>
-    <br><br>
-
-    <div>
-      <%= link_to 'Home', root_path %>
-      <br>
-      <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+  <div class="max-w-sm w-full lg:max-w-full lg:flex rounded overflow-hidden shadow-lg bg-white">
+    <div class="px-6 py-4">
+      <%= yield %>
     </div>
-  <% end %>
+  </div>
 </div>
 </body>
 </html>

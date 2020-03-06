@@ -1,48 +1,50 @@
-<h2>Sign up</h2>
+<div class="text-blue-700">
+  <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="field">
+      <%= f.label :email %><br/>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br/>
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br/>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
 
-  <br>
+    <br>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
+    <div class="field">
+      <%= f.label :name %><br/>
+      <%= f.text_field :name %>
+    </div>
 
-  <div class="field">
-    <%= f.label :sca_name %><br />
-    <%= f.text_field :sca_name %>
-  </div>
+    <div class="field">
+      <%= f.label :sca_name %><br/>
+      <%= f.text_field :sca_name %>
+    </div>
 
-  <div class="field">
-    <%= f.label :region %><br />
-    <%= f.select :region_id, Region.all.map{ |m| [m.name, m.id] }%>
-  </div>
+    <div class="field">
+      <%= f.label :region %><br/>
+      <%= f.select :region_id, Region.all.map { |m| [m.name, m.id] } %>
+    </div>
 
-  <br>
+    <br>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+    <div class="actions">
+      <%= f.submit "Sign up" %>
+    </div>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>

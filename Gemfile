@@ -24,9 +24,9 @@ gem 'pg'
 gem 'devise'
 gem 'pundit'
 gem 'rest-client'
-gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'sendgrid-ruby'
+gem 'tailwindcss', '~> 1.0.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

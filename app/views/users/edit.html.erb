@@ -1,9 +1,11 @@
-<h1>Editing User</h1>
+<div class="text-blue-700">
+  <h1>Editing User</h1>
 
-<%= render 'form', user: @user %>
+  <%= render 'form', user: @user %>
 
-<% if current_user.admin? %>
-  <%= link_to 'Back', users_path %>
-<% else %>
-  <%= link_to 'Back', current_user %>
-<% end %>
+  <% if current_user.admin? %>
+    <%= link_to 'Back', users_path %>
+  <% else %>
+    <%= link_to 'Back', current_user %>
+  <% end %>
+</div>

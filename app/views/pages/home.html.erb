@@ -1,5 +1,45 @@
-<p>Welcome to the NEW Midrealm A&S Registration System!</p>
-<p>This is where you can register to be an entrant, as well as a judge for the Middle Kingdom's annual A&S Faire - for both the Regional and Kingdom Faires!</p>
-<p>PLEASE NOTE:  If you have not registered for a new account as of January 1st, 2020, you will be prompted to do so.  Old user accounts from the other system will not be recognized here.</p>
-<hr>
-<%= link_to('Login', new_user_session_path) %> | <%= link_to('Register', new_user_registration_path) %>
+<div class="w-screen h-screen bg-cover md:bg-local relative" style="background-image: url(bookmark.jpg)">
+  <div class="bg-white opacity-50 px-4 py-16 md:py-10"></div>
+
+  <div class="absolute top-0 left-0 p-4 w-screen flex items-center justify-between">
+    <div>
+      <%= link_to 'Midrealm Arts and Sciences Portal', root_path, class: "text-5xl md:text-3xl font-semibold" %>
+    </div>
+    <div class="sm:hidden md:block">
+      <% if user_signed_in? %>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "hover:text-yellow-500 text-white font-bold py-2 px-4 rounded" %>
+      <% else %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "bg-white opacity-100 hover:bg-teal-300 font-bold py-2 px-4 rounded" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="bg-white rounded relative md:absolute bottom-0 left-0 m-16 p-5 w-3/4 md:w-auto">
+    <div class="text-gray-800 text-5xl md:text-2xl">Sign in to be an entrant or a judge.</div>
+
+    <%= form_for(:user, :url => session_path(:user)) do |f| %>
+      <label class="m-2 block text-gray-700 text-4xl md:text-sm font-bold mb-2" for="username">
+        Username
+      </label>
+      <div class="m-2">
+        <%= f.text_field :email, class: "shadow appearance-none border rounded w-3/4 py-4 px-3 md:py-2 md:px-auto text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+      </div>
+      <label class="m-2 block text-gray-700 text-4xl md:text-sm font-bold mb-2" for="password">
+        Password
+      </label>
+      <div class="m-2">
+        <%= f.password_field :password, class: "shadow appearance-none border rounded w-3/4 py-4 px-3 md:px-auto md:py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+      </div>
+      <div class="m-8 md:m-2">
+        <%= f.submit 'Sign In', class: "bg-teal-500 hover:bg-teal-300 font-bold py-6 px-12 text-3xl md:text-base md:py-2 md:px-4 rounded" %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "md:hidden bg-gray-500 hover:bg-teal-300 font-bold rounded py-8 px-12 text-3xl" %>
+      </div>
+      <div>
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me, class: "text-xl md:text-sm text-gray-500" %>
+      </div>
+      <div><%= link_to "Forgot your password?", new_password_path(:user), class: "text-xl md:text-sm text-gray-500" %></div>
+    <% end %>
+
+  </div>
+</div>
