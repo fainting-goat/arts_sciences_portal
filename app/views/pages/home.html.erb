@@ -1,44 +1,44 @@
-<div class="w-screen h-screen bg-cover md:bg-local relative" style="background-image: url(bookmark.jpg)">
-  <div class="bg-white opacity-50 px-4 py-16 md:py-10"></div>
+<div class="w-screen h-screen bg-cover lg:bg-local relative" style="background-image: url(bookmark.jpg)">
+  <div class="bg-white opacity-50 px-4 py-16 lg:py-10"></div>
 
   <div class="absolute top-0 left-0 p-4 w-screen flex items-center justify-between">
     <div>
-      <%= link_to 'Midrealm Arts and Sciences Portal', root_path, class: "text-5xl md:text-3xl font-semibold" %>
+      <%= link_to 'Midrealm Arts and Sciences Portal', root_path, class: "text-5xl lg:text-3xl font-semibold" %>
     </div>
-    <div class="sm:hidden md:block">
+    <div class="sm:hidden lg:block">
       <% if user_signed_in? %>
-        <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "hover:text-yellow-500 text-white font-bold py-2 px-4 rounded" %>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "hover:text-teal-300 text-white font-bold py-2 px-4 rounded" %>
       <% else %>
         <%= link_to "Sign Up", new_user_registration_path, class: "bg-white opacity-100 hover:bg-teal-300 font-bold py-2 px-4 rounded" %>
       <% end %>
     </div>
   </div>
 
-  <div class="bg-white rounded relative md:absolute bottom-0 left-0 m-16 p-5 w-3/4 md:w-auto">
-    <div class="text-gray-800 text-5xl md:text-2xl">Sign in to be an entrant or a judge.</div>
+  <div class="bg-white rounded relative lg:absolute bottom-0 left-0 m-16 p-5 w-3/4 lg:w-auto">
+    <div class="text-gray-800 text-5xl lg:text-2xl">Sign in to be an entrant or a judge.</div>
 
     <%= form_for(:user, :url => session_path(:user)) do |f| %>
-      <label class="m-2 block text-gray-700 text-4xl md:text-sm font-bold mb-2" for="username">
+      <label class="m-2 block text-gray-700 text-4xl lg:text-sm font-bold mb-2" for="username">
         Username
       </label>
       <div class="m-2">
-        <%= f.text_field :email, class: "shadow appearance-none border rounded w-3/4 py-4 px-3 md:py-2 md:px-auto text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <%= f.text_field :email, class: "text-2xl lg:text-base shadow appearance-none border rounded w-3/4 py-4 px-3 lg:py-2 lg:px-auto text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
-      <label class="m-2 block text-gray-700 text-4xl md:text-sm font-bold mb-2" for="password">
+      <label class="m-2 block text-gray-700 text-4xl lg:text-sm font-bold mb-2" for="password">
         Password
       </label>
       <div class="m-2">
-        <%= f.password_field :password, class: "shadow appearance-none border rounded w-3/4 py-4 px-3 md:px-auto md:py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+        <%= f.password_field :password, class: "text-2xl lg:text-base shadow appearance-none border rounded w-3/4 py-4 px-3 lg:px-auto lg:py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
-      <div class="m-8 md:m-2">
-        <%= f.submit 'Sign In', class: "bg-teal-500 hover:bg-teal-300 font-bold py-6 px-12 text-3xl md:text-base md:py-2 md:px-4 rounded" %>
-        <%= link_to "Sign Up", new_user_registration_path, class: "md:hidden bg-gray-500 hover:bg-teal-300 font-bold rounded py-8 px-12 text-3xl" %>
+      <div class="m-8 lg:m-2">
+        <%= f.submit 'Sign In', class: "bg-teal-500 hover:bg-teal-300 text-black font-bold py-6 px-12 text-3xl lg:text-base lg:py-2 lg:px-4 rounded" %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "lg:hidden bg-gray-500 hover:bg-teal-300 font-bold rounded py-8 px-12 text-3xl" %>
       </div>
       <div>
         <%= f.check_box :remember_me %>
-        <%= f.label :remember_me, class: "text-xl md:text-sm text-gray-500" %>
+        <%= f.label :remember_me, class: "text-xl lg:text-sm text-gray-500" %>
       </div>
-      <div><%= link_to "Forgot your password?", new_password_path(:user), class: "text-xl md:text-sm text-gray-500" %></div>
+      <div><%= link_to "Forgot your password?", new_password_path(:user), class: "text-xl lg:text-sm text-gray-500" %></div>
     <% end %>
 
   </div>

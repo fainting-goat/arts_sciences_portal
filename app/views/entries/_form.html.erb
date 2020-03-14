@@ -1,101 +1,98 @@
-<%= form_with(model: entry, local: true) do |form| %>
-  <% if entry.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
+<div class="my-5">
+  <%= form_with(model: entry, local: true) do |form| %>
+    <% if entry.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(entry.errors.count, "error") %> prohibited this entry from being saved:</h2>
 
-      <ul>
-        <% entry.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% if Fair.all.empty? %>
-    <div class="alert alert-danger">
-      <h4>There are no active fairs at this time.  You will not be able to submit an entry.</h4>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :entry_name %>
-    <%= form.text_field :entry_name, size: "50x1" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %><br>
-    <%= form.text_area :description, size: "80x10"  %>
-  </div>
-
-  <div class="field">
-    <%= form.label :materials_used %><br>
-    <%= form.text_field :materials, size: "80x1" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :culture %><br>
-    <%= form.text_field :culture, size: "80x1" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :time_period %><br>
-    <%= form.text_field :time_period, size: "80x1" %>
-  </div>
-
-  <br>
-
-  <div class="field">
-    <%= form.label :category %>
-    <%= form.select :category_id, Category.all.default_order.map{ |m| ["#{m.division.name} - #{m.name}", m.id] }%>
-  </div>
-
-  <div id="entry_category_desc">
-    <p><%= simple_format Category.default_order.first.description %></p>
-    <p id="mail_in_warning"></p>
-  </div>
-
-  <div class="field">
-    <%= form.label :fair %>
-    <%= form.select :fair_id, Fair.all.in_order.map{ |m| [m.name, m.id] }, disabled: Fair.where(entries_allowed: false).pluck(:id) %>
-  </div>
-
-  <div class="field">
-    <p><%= form.radio_button :in_person, true %> Face-to-face
-      <br>
-    <%= form.radio_button :in_person, false %> Not Face-to-face</p>
-  </div>
-
-  <div class="field">
-    <p><%= form.radio_button :scored, true %> Scored
-    <br>
-      <%= form.radio_button :scored, false %> Commentary Only</p>
-  </div>
-
-  <div class="field">
-    <%= form.check_box :pentathlon %>
-    <%= form.label :pentathlon %>
-  </div>
-
-  <div class="field">
-    <%= form.check_box :division %>
-    <%= form.label :division %>
-  </div>
-
-  <div class="field">
-    <%= form.check_box :first_time %>
-    <%= form.label :first_time %>
-  </div>
-
-  <div class="field">
-    <%= form.check_box :youth %>
-    <%= form.label :youth %>
-  </div>
-
-  <div class="actions">
-    <% if Fair.all.empty? %>
-      <%= form.submit disabled: true%>
-  <% else %>
-      <%= form.submit %>
+        <ul>
+          <% entry.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  </div>
-<% end %>
+
+    <% if Fair.all.empty? %>
+      <div class="alert alert-danger">
+        <h4>There are no active fairs at this time. You will not be able to submit an entry.</h4>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :entry_name, class: "m-2 block text-gray-700 text-4xl lg:text-sm font-bold mb-2" %>
+      <%= form.text_field :entry_name, size: "50x1", class: "text-2xl lg:text-base shadow appearance-none border rounded w-1/4 py-4 px-3 lg:px-auto lg:py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description, class: "m-2 block text-gray-700 text-4xl lg:text-sm font-bold mb-2" %>
+      <%= form.text_area :description, size: "80x10", class: "text-2xl lg:text-base shadow appearance-none border rounded w-full py-4 px-3 lg:px-auto lg:py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :materials_used, class: "m-2 block text-gray-700 text-4xl lg:text-sm font-bold mb-2" %>
+      <%= form.text_field :materials, size: "80x1", class: "text-2xl lg:text-base shadow appearance-none border rounded w-1/4 py-4 px-3 lg:px-auto lg:py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :culture, class: "m-2 block text-gray-700 text-4xl lg:text-sm font-bold mb-2" %>
+      <%= form.text_field :culture, size: "80x1", class: "text-2xl lg:text-base shadow appearance-none border rounded w-1/4 py-4 px-3 lg:px-auto lg:py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :time_period, class: "m-2 block text-gray-700 text-4xl lg:text-sm font-bold mb-2" %>
+      <%= form.text_field :time_period, size: "80x1", class: "text-2xl lg:text-base shadow appearance-none border rounded w-1/4 py-4 px-3 lg:px-auto lg:py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :category, class: "m-2 block text-gray-700 text-4xl lg:text-sm font-bold mb-2" %>
+      <%= form.select :category_id, Category.all.default_order.map { |m| ["#{m.division.name} - #{m.name}", m.id] }, {}, {class: "text-2xl lg:text-base shadow appearance-none border rounded w-1/4 py-4 px-3 lg:px-auto lg:py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"} %>
+    </div>
+
+    <div id="entry_category_desc" class="m-2 p-2">
+      <p><%= simple_format Category.default_order.first.description, class: "text-gray-700" %></p>
+      <p id="mail_in_warning"></p>
+    </div>
+
+    <div class="field">
+      <%= form.label :fair, class: "m-2 block text-gray-700 text-4xl lg:text-sm font-bold mb-2" %>
+      <%= form.select :fair_id, Fair.all.in_order.map { |m| [m.name, m.id] }, {disabled: Fair.where(entries_allowed: false).pluck(:id)}, {class: "text-2xl lg:text-base shadow appearance-none border rounded w-1/4 py-4 px-3 lg:px-auto lg:py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"} %>
+    </div>
+
+    <div class="field m-2">
+      <p class="text-gray-700"><%= form.radio_button :in_person, true %> Face-to-face
+
+        <%= form.radio_button :in_person, false %> Not Face-to-face</p>
+    </div>
+
+    <div class="field m-2">
+      <p class="text-gray-700"><%= form.radio_button :scored, true %> Scored
+
+        <%= form.radio_button :scored, false %> Commentary Only</p>
+    </div>
+
+    <div class="field m-2">
+      <%= form.check_box :pentathlon %>
+      <%= form.label :pentathlon, class: "text-gray-700" %>
+    </div>
+
+    <div class="field m-2">
+      <%= form.check_box :division %>
+      <%= form.label :division, class: "text-gray-700" %>
+    </div>
+
+    <div class="m-2">
+      <%= form.check_box :first_time %>
+      <%= form.label :first_time, class: "text-gray-700" %>
+    </div>
+
+    <div class="field m-2">
+      <%= form.check_box :youth %>
+      <%= form.label :youth, class: "text-gray-700" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.submit 'Submit Entry', class: "bg-teal-500 hover:bg-teal-300 font-bold py-6 px-12 text-3xl lg:text-base lg:py-2 lg:px-4 rounded" %>
+      <%= link_to 'Back', entries_path, class: "py-2 px-4 text-3xl hover:text-teal-500 text-gray-500 font-bold lg:text-base rounded" %>
+    </div>
+  <% end %>
+</div>

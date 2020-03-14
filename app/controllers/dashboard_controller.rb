@@ -5,6 +5,9 @@ class DashboardController < ApplicationController
   before_action :assign_next_fair
 
   def index
+    @entries = Entry.fair_entries(@next_fair).user_entries(current_user)
+    @volunteered = !JudgeFair.find_by(user_id: current_user.id, fair_id: @next_fair.id).nil?
+    puts @volunteered.inspect
   end
 
   def review

@@ -1,87 +1,89 @@
-<p>
-  <strong>Entrants:</strong>
-  <br>
-  <% UserEntry.entrants(@entry).each do |user| %>
-    <%= user.email %> - <%= user.sca_name %><br>
-  <% end %>
-</p>
+<%= render partial: 'layouts/navigation', locals: {enable: 'entries'} %>
 
-<hr>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Entrants:</label>
+  <div class="m-2 text-gray-700"
+       <% UserEntry.entrants(@entry).each do |user| %>
+       <%= user.email %> - <%= user.sca_name %><br>
+    <% end %>
+  </div>
+</div>
 
-<p>
-  <strong>Entry name:</strong>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Entry name:</label>
   <%= @entry.entry_name %>
-</p>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= simple_format @entry.description %>
-</p>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Description:</label>
+  <%= simple_format @entry.description, class: "text-gray-700" %>
+</div>
 
-<p>
-  <strong>Category:</strong>
-  <%= @entry.category.name  %>
-</p>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Category:</label>
+  <%= @entry.category.name %>
+</div>
 
-<p>
-  <strong>Timeslot:</strong>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Timeslot:</label>
   <%= @entry.fair.scheduling_visible ? @entry.timeslot_description : "Not Assigned Yet" %>
-</p>
+</div>
 
-<p>
-  <strong>Room:</strong>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Room:</label>
   <%= @entry.fair.scheduling_visible ? @entry.location_description : "Not Assigned Yet" %>
-</p>
+</div>
 
-<p>
-  <strong>Fair:</strong>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Fair:</label>
   <%= @entry.fair.name %>
-</p>
+</div>
 
-<p>
-  <strong>Materials:</strong>
-  <%= @entry.materials  %>
-</p>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Materials:</label>
+  <%= @entry.materials %>
+</div>
 
-<p>
-  <strong>Culture:</strong>
-  <%= @entry.culture  %>
-</p>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Culture:</label>
+  <%= @entry.culture %>
+</div>
 
-<p>
-  <strong>Time Period:</strong>
-  <%= @entry.time_period  %>
-</p>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Time Period:</label>
+  <%= @entry.time_period %>
+</div>
 
-<p><strong>Judging Options</strong></p>
+<div class="m-2 text-gray-700"><label class="font-bold text-gray-500">Judging Options:</label></div>
 
-<p>
+<div class="m-2 text-gray-700">
   <ul>
-    <li><%= @entry.in_person_option  %></li>
-    <li><%= @entry.scored_option %></li>
+    <li class="text-gray-700"><%= @entry.in_person_option %></li>
+    <li class="text-gray-700"><%= @entry.scored_option %></li>
   </ul>
-</p>
+</div>
 
-<p>
-  <strong>Pentathlon?:</strong>
-  <%= @entry.pentathlon  %>
-</p>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Pentathlon?:</label>
+  <%= @entry.pentathlon %>
+</div>
 
-<p>
-  <strong>Division?:</strong>
-  <%= @entry.division  %>
-</p>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Division?:</label>
+  <%= @entry.division %>
+</div>
 
-<p>
-  <strong>First time?:</strong>
-  <%= @entry.first_time  %>
-</p>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">First time?:</label>
+  <%= @entry.first_time %>
+</div>
 
-<p>
-  <strong>Youth?:</strong>
-  <%= @entry.youth  %>
-</p>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Youth?:</label>
+  <%= @entry.youth %>
+</div>
 
-
-<%= link_to 'Edit', edit_entry_path(@entry) %> |
-<%= link_to 'Back', entries_path %>
+<div class="my-5">
+  <%= link_to 'Edit', edit_entry_path(@entry), class: "bg-teal-500 hover:bg-teal-300 font-bold py-6 px-12 text-3xl lg:text-base lg:py-2 lg:px-4 rounded" %>
+  <%= link_to 'Back', entries_path, class: "py-2 px-4 text-3xl hover:text-teal-500 text-gray-500 font-bold lg:text-base rounded" %>
+</div>

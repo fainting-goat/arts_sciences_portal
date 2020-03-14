@@ -1,17 +1,20 @@
-<h1>Group Entry Participants</h1>
+<%= render partial: 'layouts/navigation', locals: {enable: 'entries'} %>
 
+<div class="my-5 text-gray-500 text-lg">
+  Group entrants for: <%= @entry.entry_name %>
+</div>
 <table>
-  <thead>
+  <thead class="text-gray-500">
     <tr>
       <th colspan="3"></th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="text-gray-700">
     <% @user_entries.each do |user_entry| %>
       <tr>
         <td><%= user_entry.user.email %></td>
-        <td><%= link_to 'Remove Entrant', [@entry, user_entry], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Remove Entrant', [@entry, user_entry], method: :delete, data: { confirm: 'Are you sure?' }, class: "text-teal-500" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -19,5 +22,7 @@
 
 <br>
 
-<%= link_to 'Add a new entrant', new_entry_user_entry_path(@entry) %>
-<br><%= link_to 'Back', entries_path %>
+<div class="my-5">
+  <%= link_to 'Add an Entrant', new_entry_user_entry_path(@entry), class: "bg-teal-500 hover:bg-teal-300 font-bold py-6 px-12 text-3xl lg:text-base lg:py-2 lg:px-4 rounded" %>
+  <%= link_to 'Back', entries_path, class: "py-2 px-4 text-3xl hover:text-teal-500 text-gray-500 font-bold lg:text-base rounded" %>
+</div>

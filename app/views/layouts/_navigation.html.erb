@@ -1,0 +1,31 @@
+<ul class="flex">
+  <li class="mr-3">
+    <%= link_to 'Home', root_path, class: enable == 'home' ? "inline-block border border-teal-500 rounded py-1 px-3 bg-teal-500 text-white" : "inline-block border border-white rounded hover:border-gray-200 text-teal-500 hover:bg-gray-200 py-1 px-3" %>
+  </li>
+  <li class="mr-3">
+    <%= link_to 'Fair Entries', entries_path, class: enable == 'entries' ? "inline-block border border-teal-500 rounded py-1 px-3 bg-teal-500 text-white" : "inline-block border border-white rounded hover:border-gray-200 text-teal-500 hover:bg-gray-200 py-1 px-3" %>
+  </li>
+  <li class="mr-3">
+    <%= link_to 'Volunteer', judge_fairs_path, class: enable == 'volunteer' ? "inline-block border border-teal-500 rounded py-1 px-3 bg-teal-500 text-white" : "inline-block border border-white rounded hover:border-gray-200 text-teal-500 hover:bg-gray-200 py-1 px-3" %>
+  </li>
+  <li class="mr-3">
+    <%= link_to 'Judging Preferences', user_judge_preferences_path(current_user), class: enable == 'preferences' ? "inline-block border border-teal-500 rounded py-1 px-3 bg-teal-500 text-white" : "inline-block border border-white rounded hover:border-gray-200 text-teal-500 hover:bg-gray-200 py-1 px-3" %>
+  </li>
+  <li class="mr-3">
+    <%= link_to 'User Settings', current_user, class: enable == 'user' ? "inline-block border border-teal-500 rounded py-1 px-3 bg-teal-500 text-white" : "inline-block border border-white rounded hover:border-gray-200 text-teal-500 hover:bg-gray-200 py-1 px-3" %>
+  </li>
+  <li class="mr-3">
+    <% if !@next_fair.nil? && @next_fair.scheduling_visible %>
+      <%= link_to 'Review your Schedule', review_path, class: enable == 'review' ? "inline-block border border-teal-500 rounded py-1 px-3 bg-teal-500 text-white" : "inline-block border border-white rounded hover:border-gray-200 text-teal-500 hover:bg-gray-200 py-1 px-3" %>
+    <% else %>
+      <div class="inline-block py-1 px-3 text-gray-400 cursor-not-allowed">Review Schedule</div>
+    <% end %>
+  </li>
+  <li class="mr-3">
+    <% if !@next_fair.nil? && scoresheets_visible?(@next_fair, current_user) %>
+      <%= link_to 'Submit a Scoresheet', scoresheets_path, class: enable == 'scoresheet' ? "inline-block border border-teal-500 rounded py-1 px-3 bg-teal-500 text-white" : "inline-block border border-white rounded hover:border-gray-200 text-teal-500 hover:bg-gray-200 py-1 px-3" %>
+    <% else %>
+      <div class="inline-block py-1 px-3 text-gray-400 cursor-not-allowed">Submit a Scoresheet</div>
+    <% end %>
+  </li>
+</ul>

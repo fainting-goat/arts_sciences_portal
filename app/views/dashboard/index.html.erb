@@ -1,3 +1,28 @@
+<%= render partial: 'layouts/navigation', locals: {enable: 'home'} %>
+
+<div class="my-5 text-xl text-gray-700">
+  Welcome to the new Arts and Sciences Portal!
+</div>
+<div class="my-5 text-gray-700">
+  The next fair is: <strong><%= @next_fair.name %></strong>
+</div>
+<div class="my-5 text-gray-700">
+  You have these entries submitted for it:
+  <br>
+  <% @entries.each do |entry| %>
+    <li><%= link_to entry.entry_name, entry, class: "text-teal-500" %>
+  <% end %>
+</div>
+<div class="my-5 text-gray-700">
+  You <strong><%= @volunteered ? "are" : "are not" %></strong> signed up as a judge for it.
+</div>
+<div class="my-5 text-gray-700">
+  The final schedule <strong><%= @next_fair.scheduling_visible ? "is" : "is not" %></strong> finalized.
+</div>
+<div class="my-5 text-gray-700">
+  Scoresheets <strong><%= scoresheets_visible?(@next_fair, current_user) ? "are" : "are not" %></strong> available.
+</div>
+
 <% if current_user.admin? %>
   <h3>Tallyroom</h3>
   <%= link_to 'Tallyroom', tallyroom_path %>
@@ -20,7 +45,7 @@
     <br>
     <%= link_to 'Review your Schedule', review_path %>
   <% end %>
-  <% if !@next_fair.nil? && scoresheets_visible?(@next_fair, current_user)  %>
+  <% if !@next_fair.nil? && scoresheets_visible?(@next_fair, current_user) %>
     <br>
     <%= link_to 'Submit a Scoresheet', scoresheets_path %>
   <% end %>
@@ -48,20 +73,4 @@
   <%= link_to 'Room Location Management', locations_url %>
   <br>
   <%= link_to 'Entry Management', entries_path %>
-<% else %>
-  <%= link_to 'Manage Your Entries', entries_path %>
-  <br>
-  <%= link_to 'Volunteer for a Fair', judge_fairs_path %>
-  <br>
-  <%= link_to 'User Preferences', current_user %>
-  <br>
-  <%= link_to 'Manage your judging preferences', user_judge_preferences_path(current_user) %>
-  <% if !@next_fair.nil? && @next_fair.scheduling_visible %>
-    <br>
-    <%= link_to 'Review your Schedule', review_path %>
-  <% end %>
-  <% if !@next_fair.nil? && scoresheets_visible?(@next_fair, current_user)  %>
-    <br>
-    <%= link_to 'Submit a Scoresheet', scoresheets_path %>
-  <% end %>
 <% end %>

@@ -1,6 +1,3 @@
-<h1>Editing Entry</h1>
+<%= render partial: 'layouts/navigation', locals: {enable: 'entries'} %>
 
 <%= render 'form', entry: @entry %>
-
-<%= link_to 'Show', @entry %> |
-<%= link_to 'Back', entries_path %>

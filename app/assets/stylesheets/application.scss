@@ -13,6 +13,11 @@
  */
 @tailwind base;
 @tailwind components;
+
+.test {
+  @apply .p-4 .bg-blue-500 .text-purple-500;
+}
+
 @tailwind utilities;
 
 /*!
