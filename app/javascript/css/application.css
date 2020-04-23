@@ -1,3 +1,61 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.page-header-text {
+    @apply text-gray-500 text-xl;
+}
+
+.important-button {
+    @apply bg-teal-500 font-bold py-6 px-12 text-3xl rounded;
+}
+
+.important-button:hover {
+    @apply bg-teal-300;
+}
+
+.less-important-button {
+    @apply py-2 px-4 text-3xl text-gray-500 font-bold rounded;
+}
+
+.less-important-button:hover {
+    @apply text-teal-500;
+}
+
+.field-label {
+    @apply m-2 block text-gray-700 text-4xl font-bold mb-2;
+}
+
+.default-select {
+    @apply text-2xl shadow appearance-none border rounded py-4 px-3 text-gray-700 leading-tight;
+}
+
+.default-select:focus {
+    @apply outline-none shadow-outline;
+}
+
+.default-text-field {
+    @apply text-2xl shadow appearance-none border rounded w-1/4 py-4 px-3 text-gray-700 leading-tight;
+}
+
+.default-text-field:focus {
+    @apply outline-none shadow-outline;
+}
+
+@screen lg {
+    .important-button {
+        @apply text-base py-2 px-4;
+    }
+    .less-important-button {
+        @apply text-base;
+    }
+    .field-label {
+        @apply text-sm;
+    }
+    .default-select {
+        @apply text-base w-auto py-2;
+    }
+    .default-text-field {
+        @apply text-base w-auto py-2;
+    }
+}

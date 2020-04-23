@@ -12,4 +12,4 @@
   <%= render partial: 'entry_index', locals: {entries: Entry.all.order(:fair_id, :entry_name)} %>
 <% end %>
 
-<%= link_to 'Submit a New Entry', new_entry_path, class: "bg-teal-500 hover:bg-teal-300 font-bold py-6 px-12 text-3xl lg:text-base lg:py-2 lg:px-4 rounded" %><br>
+<%= link_to 'Submit a New Entry', new_entry_path, class: "important-button" %><br>

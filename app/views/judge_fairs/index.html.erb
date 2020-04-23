@@ -1,7 +1,9 @@
-<h1>Fairs Volunteered For</h1>
+<%= render partial: 'layouts/navigation', locals: {enable: 'volunteer'} %>
 
-<table>
-  <thead>
+<div class="page-header-text">Fairs Volunteered For</div>
+
+<table class="table-auto my-8">
+  <thead class="text-gray-500">
   <tr>
     <% if current_user.admin? %>
       <th>User</th>
@@ -13,7 +15,7 @@
   </tr>
   </thead>
 
-  <tbody>
+  <tbody class="text-gray-700">
   <% @judge_fairs.each do |judge_fair| %>
     <tr>
       <% if current_user.admin? %>
@@ -22,8 +24,8 @@
       <td><%= judge_fair.fair.name_with_warning %></td>
       <td><%= judge_fair.shadow_judge %></td>
       <td><%= judge_fair.first_time %></td>
-      <td><%= link_to 'Un-volunteer', judge_fair, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-      <td><%= link_to 'Edit Volunteer Details', edit_judge_fair_path(judge_fair) %></td>
+      <td><%= link_to 'Un-volunteer', judge_fair, method: :delete, data: {confirm: 'Are you sure?'}, class: 'text-teal-500' %></td>
+      <td><%= link_to 'Edit Volunteer Details', edit_judge_fair_path(judge_fair), class: 'text-teal-500' %></td>
     </tr>
   <% end %>
   </tbody>
@@ -31,5 +33,4 @@
 
 <br>
 
-<%= link_to 'Volunteer', new_judge_fair_path %>
-<br><%= link_to 'Back', root_path %>
+<%= link_to 'Volunteer', new_judge_fair_path, class: 'important-button' %>

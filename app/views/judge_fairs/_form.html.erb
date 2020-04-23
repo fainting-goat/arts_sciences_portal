@@ -1,47 +1,49 @@
-<%= form_with(model: judge_fair, local: true) do |form| %>
-  <% if judge_fair.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(judge_fair.errors.count, "error") %> prohibited this judge_fair from being saved:</h2>
+<div class="my-5">
+  <%= form_with(model: judge_fair, local: true) do |form| %>
+    <% if judge_fair.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(judge_fair.errors.count, "error") %> prohibited this judge_fair from being saved:</h2>
 
-      <ul>
-        <% judge_fair.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% if Fair.all.empty? %>
-    <div class="alert alert-danger">
-      <h4>There are no active fairs at this time.  You will not be able to volunteer.</h4>
-    </div>
-  <% end %>
-
-  <p>Here you can volunteer to judge at an upcoming Fair.  If you wish to shadow judge or this is your first time judging,
-  please check the applicable boxes.  Otherwise, just select your fair and hit "Volunteer"!</p>
-
-  <hr>
-
-  <div class="field">
-    <%= form.label :fair_id %>
-    <%= form.select :fair_id, Fair.current.map{ |m| [m.name_with_warning, m.id] }%>
-  </div>
-
-  <div class="field">
-    <%= form.label "Volunteer as a shadow judge?" %>
-    <%= form.check_box :shadow_judge %>
-  </div>
-
-  <div class="field">
-    <%= form.label "This will be my first time as a judge." %>
-    <%= form.check_box :first_time %>
-  </div>
-
-  <div class="actions">
-    <% if Fair.all.empty? %>
-      <%= form.submit "Volunteer", disabled: true%>
-    <% else %>
-      <%= form.submit "Volunteer" %>
+        <ul>
+          <% judge_fair.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  </div>
-<% end %>
+
+    <% if Fair.all.empty? %>
+      <div class="alert alert-danger">
+        <h4>There are no active fairs at this time. You will not be able to volunteer.</h4>
+      </div>
+    <% end %>
+
+    <p class="text-gray-700">Here you can volunteer to judge at an upcoming Fair. If you wish to shadow judge or this is your first time
+      judging,
+      please check the applicable boxes. Otherwise, just select your fair and hit "Volunteer"!</p>
+
+    <hr>
+
+    <div class="p-2">
+      <%= form.select :fair_id, Fair.current.map { |m| [m.name_with_warning, m.id] }, {}, class: 'default-select' %>
+    </div>
+
+    <div class="p-2">
+      <%= form.label "Volunteer as a shadow judge?", class: 'text-gray-700' %>
+      <%= form.check_box :shadow_judge %>
+    </div>
+
+    <div class="p-2">
+      <%= form.label "This will be my first time as a judge.", class: 'text-gray-700' %>
+      <%= form.check_box :first_time %>
+    </div>
+
+    <div class="actions">
+      <% if Fair.all.empty? %>
+        <%= form.submit "Volunteer", disabled: true, class: 'important-button' %>
+      <% else %>
+        <%= form.submit "Volunteer", class: 'important-button' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

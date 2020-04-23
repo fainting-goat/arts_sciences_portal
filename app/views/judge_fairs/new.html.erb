@@ -1,5 +1,5 @@
-<h1>Volunteer for a Fair</h1>
+<%= render partial: 'layouts/navigation', locals: {enable: 'volunteer'} %>
+
+<div class="page-header-text">Volunteer for a Fair</div>
 
 <%= render 'form', judge_fair: @judge_fair %>
-
-<%= link_to 'Back', judge_fairs_path %>

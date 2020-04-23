@@ -1,67 +1,71 @@
-<% if current_user.admin? && @user.id != current_user.id %>
-  <div class="alert alert-danger">
-    <h4>You are currently in admin mode and are viewing a user other than yourself.</h4>
-  </div>
-<% end %>
+<%= render partial: 'layouts/navigation', locals: {enable: 'user'} %>
 
-<%= form_with(model: user, local: true) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(user_role.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="my-5">
+  <% if current_user.admin? && @user.id != current_user.id %>
+    <div class="alert alert-danger">
+      <h4>You are currently in admin mode and are viewing a user other than yourself.</h4>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :region %>
-    <%= form.select :region_id, Region.all.map{ |m| [m.name, m.id] }%>
-  </div>
+  <%= form_with(model: user, local: true) do |form| %>
+    <% if user.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(user_role.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-  <% if current_user.admin? %>
-    <div class="field">
-      <%= form.label :user_role %>
-      <%= form.select :user_role_id, UserRole.all.map{ |m| [m.role_name, m.id] }%>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :sca_name %>
-    <%= form.text_field :sca_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label "Peerages:" %>
-    <br>
-    <%= form.collection_check_boxes(:peerage_ids, Peerage.all, :id, :description) do |b| %>
-      <span>
-        <%= b.check_box %>
-        <%= b.label %>
-      </span>
+        <ul>
+          <% user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  </div>
 
-  <hr>
+    <div class="field">
+      <%= form.label :region, class: 'field-label' %>
+      <%= form.select :region_id, Region.all.map { |m| [m.name, m.id] }, {}, class: 'default-select' %>
+    </div>
 
-  <p>If you will not be judging entries, you may ignore these questions.</p>
+    <% if current_user.admin? %>
+      <div class="field">
+        <%= form.label :user_role, class: 'field-label' %>
+        <%= form.select :user_role_id, UserRole.all.map { |m| [m.role_name, m.id] }, {}, class: 'default-select' %>
+      </div>
+    <% end %>
 
-  <div class="field">
-    <%= form.check_box :written %>
-    <%= form.label 'I prefer to not judge entries face-to-face.' %>
-  </div>
+    <div class="field">
+      <%= form.label :name, class: 'field-label' %>
+      <%= form.text_field :name, class: 'default-text-field' %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <div class="field">
+      <%= form.label :sca_name, class: 'field-label' %>
+      <%= form.text_field :sca_name, class: 'default-text-field' %>
+    </div>
 
-  <%= link_to "Change your password", edit_user_registration_path %>
-<% end %>
+    <div class="field">
+      <%= form.label "Peerages:", class: 'field-label' %>
+      <%= form.collection_check_boxes(:peerage_ids, Peerage.all, :id, :description) do |b| %>
+      <span>
+        <%= b.label(class: "field-label") { b.check_box + " " + b.text } %>
+      </span>
+      <% end %>
+    </div>
+
+    <div class="m-2 text-gray-700">If you will not be judging entries, you may ignore these questions.</div>
+
+    <div class="field">
+      <%= form.check_box :written, class: "h-6 w-6 lg:h-auto lg:w-auto" %>
+      <%= form.label 'I prefer to not judge entries face-to-face.', class: 'text-gray-700 text-4xl lg:text-base' %>
+    </div>
+
+    <div class="my-5">
+      <%= form.submit class: 'important-button' %>
+      <%= link_to "Change your password", edit_user_registration_path, class: 'less-important-button' %>
+      <% if current_user.admin? %>
+        <%= link_to 'Back', users_path, class: 'less-important-button' %>
+      <% else %>
+        <%= link_to 'Back', current_user, class: 'less-important-button' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,51 +1,48 @@
+<%= render partial: 'layouts/navigation', locals: {enable: 'user'} %>
+
 <% if current_user.admin? && @user.id != current_user.id %>
   <div class="alert alert-danger">
     <h4>You are currently in admin mode and are viewing a user other than yourself.</h4>
   </div>
 <% end %>
 
-<p>
-  <strong>Email:</strong>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Email:</label>
   <%= @user.email %>
-</p>
+</div>
 
-<p>
-  <strong>Name:</strong>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Name:</label>
   <%= @user.name %>
-</p>
+</div>
 
-<p>
-  <strong>SCA Name:</strong>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">SCA Name:</label>
   <%= @user.sca_name %>
-</p>
+</div>
 
-<p>
-  <strong>Region:</strong>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Region:</label>
   <%= @user.region.name %>
-</p>
+</div>
 
-<p>
-  <strong>Peerage(s):</strong>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Peerage(s):</label>
   <br>
   <% @user.peerages.each do |peerage| %>
     <%= peerage.description %><br>
   <% end %>
-</p>
+</div>
 
-<p>
-  <strong>Prefers written entries?</strong>
+<div class="m-2 text-gray-700">
+  <label class="font-bold text-gray-500">Prefers written entries?</label>
   <%= @user.written %>
-</p>
+</div>
 
 <% if current_user.admin? %>
   <%= link_to 'Manage judging preferences', user_judge_preferences_path(@user) %>
 <% end %>
 
-<hr>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<% if current_user.admin? %>
-  <%= link_to 'Back', users_path %>
-<% else %>
-  <%= link_to 'Back', root_path %>
-<% end %>
+<div class="my-5">
+  <%= link_to 'Edit', edit_user_path(@user), class: 'important-button' %>
+</div>

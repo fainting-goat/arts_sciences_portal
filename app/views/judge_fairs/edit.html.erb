@@ -1,5 +1,5 @@
-<h1>Editing Volunteer Details</h1>
+<%= render partial: 'layouts/navigation', locals: {enable: 'volunteer'} %>
+
+<div class="page-header-text">Editing Volunteer Details</div>
 
 <%= render 'form', judge_fair: @judge_fair %>
-
-<%= link_to 'Back', judge_fairs_path %>
