@@ -60,35 +60,35 @@
   </div>
 
   <div class="field">
-    <p><%= form.radio_button :in_person, true %> Face-to-face
+    <p><%= form.radio_button :in_person, true, hidden: true %>
       <br>
-    <%= form.radio_button :in_person, false %> Not Face-to-face</p>
+    <%= form.radio_button :in_person, false, hidden: true %></p>
   </div>
 
   <div class="field">
-    <p><%= form.radio_button :scored, true %> Scored
+    <p><%= form.radio_button :scored, true, hidden: true %>
     <br>
-      <%= form.radio_button :scored, false %> Commentary Only</p>
+      <%= form.radio_button :scored, false, hidden: true %></p>
   </div>
 
   <div class="field">
-    <%= form.check_box :pentathlon %>
-    <%= form.label :pentathlon %>
+    <%= form.check_box :pentathlon, hidden: true %>
+    <%= form.label :pentathlon, hidden: true %>
   </div>
 
   <div class="field">
-    <%= form.check_box :division %>
-    <%= form.label :division %>
+    <%= form.check_box :division, hidden: true %>
+    <%= form.label :division, hidden: true %>
   </div>
 
   <div class="field">
-    <%= form.check_box :first_time %>
-    <%= form.label :first_time %>
+    <%= form.check_box :first_time, hidden: true %>
+    <%= form.label :first_time, hidden: true %>
   </div>
 
   <div class="field">
-    <%= form.check_box :youth %>
-    <%= form.label :youth %>
+    <%= form.check_box :youth, hidden: true %>
+    <%= form.label :youth, hidden: true %>
   </div>
 
   <div class="actions">

@@ -5,7 +5,6 @@
     <th>Timeslot</th>
     <th>Room</th>
     <th>Fair</th>
-    <th>Judging Options</th>
     <th colspan="4"></th>
   </tr>
   </thead>
@@ -17,12 +16,6 @@
       <td><%= entry.timeslot_description %></td>
       <td><%= entry.location_description %></td>
       <td><%= entry.fair.name %></td>
-      <td>
-        <ul>
-          <li><%= entry.in_person_option  %></li>
-          <li><%= entry.scored_option %></li>
-        </ul>
-      </td>
       <td><%= link_to 'View Details', entry %></td>
       <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
       <% if current_user.admin? %>
