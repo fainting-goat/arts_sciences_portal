@@ -15,9 +15,9 @@ class ScoresheetsController < ApplicationController
     fair = next_fair
 
     if fair.mail_in_scoresheets_allowed && !fair.scoresheets_allowed
-      @entries = filter_unjudged(Entry.fair_entries(fair).judge_assigned_entries(current_user).joins(:category).where('mail_in = ?', true))
+      @entries = filter_unjudged(Entry.fair_entries(fair.id).judge_assigned_entries(current_user).joins(:category).where('mail_in = ?', true))
     else
-      @entries = filter_unjudged(Entry.fair_entries(fair).judge_assigned_entries(current_user))
+      @entries = filter_unjudged(Entry.fair_entries(fair.id).judge_assigned_entries(current_user))
     end
 
     if current_user.admin?

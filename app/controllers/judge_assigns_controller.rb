@@ -7,7 +7,7 @@ class JudgeAssignsController < ApplicationController
   # GET /judge_assigns
   # GET /judge_assigns.json
   def index
-    @judge_assigns = JudgeAssign.for_fair(@fair)
+    @judge_assigns = JudgeAssign.for_fair(@fair.id)
   end
 
   # GET /judge_assigns/1

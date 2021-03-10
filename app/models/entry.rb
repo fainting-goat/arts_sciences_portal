@@ -15,7 +15,7 @@ class Entry < ApplicationRecord
 
   scope :user_entries, -> (user) { joins(:user_entries).where('user_entries.user_id = ?', user.id) }
   scope :judge_assigned_entries, -> (user) { joins(:judge_assigns).where('judge_assigns.user_id = ?', user.id) }
-  scope :fair_entries, -> (fair) { where('fair_id = ?', fair.id) }
+  scope :fair_entries, -> (fair) { where('fair_id = ?', fair) }
   scope :in_schedule_order, -> { joins(:timeslot).order(order: :asc) }
   scope :non_pents, -> (fair) { where(pentathlon: false).where('fair_id = ?', fair.id) }
   scope :pentathlons, -> (fair) { where(pentathlon: true).where('fair_id = ?', fair.id) }

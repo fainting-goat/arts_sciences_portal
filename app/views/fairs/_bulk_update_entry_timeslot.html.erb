@@ -1,3 +1,9 @@
 <% Timeslot.all.in_order.each do |timeslot| %>
-  <td><%= timeslot.description %> <%= form.radio_button :timeslot_id, timeslot.id %></td>
+  <td class="<%= warn_of_dupes(assignments, entry, timeslot) %>">
+    <%= timeslot.description %> <%= form.radio_button :timeslot_id, timeslot.id,
+                                                      checked: is_selected?(selected, entry, timeslot),
+                                                      "data-entry" => entry.id,
+                                                      "data-timeslot" => timeslot.id,
+                                                      "data-reflex" => "change->ExampleReflex#work" %>
+  </td>
 <% end %>

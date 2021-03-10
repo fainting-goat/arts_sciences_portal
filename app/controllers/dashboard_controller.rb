@@ -9,8 +9,8 @@ class DashboardController < ApplicationController
 
   def review
     @user = current_user
-    @entries = Entry.fair_entries(@next_fair).user_entries(current_user).joins(:timeslot).order("timeslots.order")
-    @judging = Entry.fair_entries(@next_fair).judge_assigned_entries(current_user).joins(:timeslot).order("timeslots.order")
+    @entries = Entry.fair_entries(@next_fair.id).user_entries(current_user).joins(:timeslot).order("timeslots.order")
+    @judging = Entry.fair_entries(@next_fair.id).judge_assigned_entries(current_user).joins(:timeslot).order("timeslots.order")
     @everything = (@entries + @judging).sort { |a, b| a.timeslot.order <=> b.timeslot.order }
   end
 

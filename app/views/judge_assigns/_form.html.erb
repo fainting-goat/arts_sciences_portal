@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :entry %>
-    <%= form.select :entry_id, Entry.fair_entries(@fair).map{ |m| [m.entry_name, m.id] }%>
+    <%= form.select :entry_id, Entry.fair_entries(@fair.id).map{ |m| [m.entry_name, m.id] }%>
   </div>
 
   <div class="field">

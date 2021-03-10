@@ -85,3 +85,4 @@ $(document).on("change", ".children_for_Skill", function() {
 
     $(".total_for_Skill").val(total);
 });
+import "controllers"
